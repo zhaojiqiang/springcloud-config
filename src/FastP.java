@@ -69,6 +69,8 @@ public class FastP {
 		fastP.insert(41L);
 		fastP.insert(0L);
 		fastP.insert(2L);
+		String h = "123";
+
 		fastP.insert(90L);
 		fastP.insert(33L);
 		fastP.insert(5L);
@@ -77,8 +79,13 @@ public class FastP {
 		fastP.disPlay();
 		fastP.quickSort();
 		fastP.disPlay();
+		String  a = new String("123").intern();
+				String p = "123";
+		System.out.println(a==p);
 
 	}
+	
+	
 	
 	
 		

@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.TreeMap;
 
 public class DiGui {
 
@@ -10,6 +11,8 @@ public class DiGui {
 			int c[] = new int[a.length+b.length];
 			guibing(a,a.length,b,b.length,c);
 			System.out.println(Arrays.toString(c));
+			
+			TreeMap<Object, Object> treeMap = new TreeMap<>();
 		}
 
 		private static void guibing(int[] a, int length, int[] b, int length2, int[] c) {
@@ -28,4 +31,6 @@ public class DiGui {
 				c[cDex++]=b[bDex++];
 			}
 		}
+		
+	
 }
