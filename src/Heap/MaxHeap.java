@@ -17,11 +17,6 @@ public class MaxHeap<T extends Comparable<T>> {
 		filterUp(size);// 向上调整堆
 	}
 
-	/**
-	 * 最大堆向上调整算法： 注：数组实现的堆中，第N个节点的左孩子节点是（2N+1）右孩子节点是（2N+2），子节点向上找父节点，（N-1）/2
-	 * 
-	 * 参数说明： start：被上调节点的起始位置（一般为数组中组最后一个元素）
-	 */
 	private void filterUp(int start) {
 		int c = start;
 		int p = (c - 1) / 2; // 找到父节点
@@ -67,7 +62,7 @@ public class MaxHeap<T extends Comparable<T>> {
 		return 0;
 	}
 
-	private void filterDown(int start, int end) {
+	public void filterDown(int start, int end) {
 		int c = start; // 当前节点的位置
 		int l = 2 * c + 1;// 当前节点左子节点位置
 
@@ -110,25 +105,26 @@ public class MaxHeap<T extends Comparable<T>> {
 			System.out.printf("%d ", a[i]);
 			tree.insert(a[i]);
 		}
-
-		System.out.printf("\n== 最 大 堆: %s", tree);
-
-		i = 85;
-		tree.insert(i);
-		System.out.printf("\n== 添加元素: %d", i);
-		System.out.printf("\n== 最 大 堆: %s", tree);
-
-		i = 90;
-		tree.remove(i);
-		System.out.printf("\n== 删除元素: %d", i);
 		System.out.printf("\n== 最 大 堆: %s", tree);
 		System.out.printf("\n");
+		
+		dupai(tree);
+	}
+
+	private static void dupai(MaxHeap<Integer> tree) {
+		for (int i = 1; i < tree.mHeap.size(); i++) {
+			Integer root = tree.mHeap.get(0);
+			Integer last = tree.mHeap.get(tree.mHeap.size() -i);
+			tree.mHeap.set(0, last);
+			tree.mHeap.set(tree.mHeap.size() -i, root);
+			tree.filterDown(0, tree.mHeap.size()-i-1);
+		}
+		System.out.println(tree);
 	}
 	
 	
 	/**
-	 * 二叉堆总结：
-	 * 	最大堆，最小堆
+	 * 	最大堆
 	 * 	找左子节点：2*N-1  右子节点：2*N+2(左子节点+1)
 	 * 	找父节点：（N-1）/2;
 	 * 
