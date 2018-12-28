@@ -102,7 +102,7 @@ public class Tree234 {
 		}
 	}
 
-	public static void main(String[] args) {
+	public static void main2(String[] args) {
 		Tree234 tree234 = new Tree234();
 
 		for (int i = 0; i < 100; i++) {
@@ -111,4 +111,21 @@ public class Tree234 {
 
 		tree234.display();
 	}
+
+	public static void main(String[] args) {
+		System.out.println("递归拉！！！！！！！！！！！！！！！！");
+		new Thread().start();
+		main(null);
+	}
+	
+	
+	
+	/**
+	 * 节点分裂：
+	 * 	1。创建一个新节点，是即将分裂节点的兄弟节点在分裂节点的右边
+	 * 	2.数据c移动到新的节点中，
+	 * 	3.数据b移动到分裂节点的父节点，
+	 * 	4.数据a保留在原来的位置
+	 * 	5.最右边的两个子节点，从要分裂的节点处断开，练到新的节点上
+	 */
 }

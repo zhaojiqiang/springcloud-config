@@ -45,13 +45,14 @@ public class MaoPao {
 	
 	
 	public static void main(String[] args) {
-		Integer[] pl = new Integer[100000000];
-		for (int i = 0; i < 100000000; i++) {
-			pl[i] = new Integer((int) ((Math.random()*9+1)*100000000));
+		Integer[] pl = new Integer[1000000];
+		for (int i = 0; i < 1000000; i++) {
+			pl[i] = new Integer((int) ((Math.random()*9+1)*1000000));
 		}
 		long currentTimeMillis = System.currentTimeMillis();
 		quickSort(pl,0,pl.length-1);
 		System.out.println(System.currentTimeMillis() - currentTimeMillis+":ss");
+		System.out.println(Arrays.toString(pl));
 //		System.out.println(Arrays.toString(pl));
 	}
 
