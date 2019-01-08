@@ -1,5 +1,10 @@
 package 并发编程;
 
+import java.lang.management.ManagementFactory;
+import java.lang.management.ThreadInfo;
+import java.lang.management.ThreadMXBean;
+import java.util.concurrent.locks.ReentrantLock;
+
 public class z1 {
 
 	/**
@@ -30,6 +35,48 @@ public class z1 {
 	 * 	对于数据库锁，枷锁和解锁必须在同一个数据库连接中，。否则会出现解锁失败的情况
 	 * 	
 	 * 1.3资源限制的挑战
+	 * 	如何在资源限制的情况下让程序执行的更快呢，根据不同的资源限制调整程序的并发度，比如下载文件程序依赖两个资源，带宽和硬盘的读写速度，有数据库操作时候
+	 * 	涉及数据库连接数，如果sql语句执行的非常快，而线程书友比数据库连接大很多的时候 则某些线程会被阻塞，等待数据库连接
+	 * 
+	 * 
+	 * 3.volatile修饰的共享变量在进行写操作时，在生成汇编指令时会有Lock前缀
+	 * 			lock前缀再多核处理器下只做两件事：
+	 * 				将当前缓存行的数据回写到内存中
+	 * 				这个协会内存的操作会使其他cpu里缓存了该内存地址的数据无效
+	 * 4.在LinkedTransferQueue使用volatile变量的时候，用一种追加字节的方式优化队列的入队出队，一个对象4字节
+	 * 	在追加15个变量 追加到64字节，因为一个缓存行不够64会被填充，队列的头尾节点就会在同一个缓存行，这样每次更新头，或者尾，就都要锁住
 	 * 	
+	 * 	是否volatile修饰的变量都要追加呢？、
+	 * 	不是的
+	 * 		两种情况：缓存行非64字节宽的，不是需要频繁写的
+	 * 5.synchronized
+	 * 	对于欧通方法的锁，是当前实例对象
+	 * 	对于静态方法，是当前类的Class对象
+	 * 	对于同步代码块：是括号中的同步对象
+	 * 		jvm基于Monitor对象和来实现	方法同步和带买块同步  代码块是monitorenter和monitorexit指令实现的，当时方法是另一种方法实现的
+	 * 		但是 方法也同样可以用这个指令实现
+	 * 
+	 * 6.为了减少获取锁和释放锁的性能。从而引入了偏向锁，和轻量级锁。锁的4种状态
+	 * 				无锁状态，偏向锁状态，轻量级锁状态，重量级锁状态
+	 * 		只能生不能降
+	 * 	
+	 * 7.CAS三大问题
+	 * 	ABA问题
+	 * 	循环时间长开销大
+	 * 	只能保证一个变量的原子操作
+	 * 
+	 * 8.线程之间的通信方式有两种：
+	 * 	共享内存和消息传递
+	 * 	
+	 * 
+	 * 
 	 */
+	
+	public static void main(String[] args) {
+		ThreadMXBean threadMXBean = ManagementFactory.getThreadMXBean();
+		ThreadInfo[] dumpAllThreads = threadMXBean.dumpAllThreads(false, false);
+		for (ThreadInfo threadInfo : dumpAllThreads) {
+			System.out.println(threadInfo.getThreadId() + "*****" + threadInfo.getThreadName());
+		}
+	}
 }

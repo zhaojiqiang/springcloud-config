@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.TreeMap;
 
 public class DiGui {
@@ -23,6 +24,7 @@ public class DiGui {
 				}else {
 					c[cDex++] = b[bDex++];
 				}
+				
 			}
 			while(aDex<length){
 				c[cDex++]=a[aDex++];
